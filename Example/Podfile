@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'ProjectEnvironmentManager_Example' do
+  pod 'ProjectEnvironmentManager', :path => '../'
+
+  target 'ProjectEnvironmentManager_Tests' do
+    inherit! :search_paths
+
+    pod 'Specta'
+    pod 'Expecta'
+  end
+end

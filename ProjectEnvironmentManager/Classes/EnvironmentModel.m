@@ -9,7 +9,7 @@
 
 @implementation EnvironmentModel
 
-- (instancetype)initWithIdentifyID:(NSString *)identifyID
+- (instancetype)initWithIdentifyID:(NSInteger)identifyID
                    environmentName:(NSString *)environmentName
                          isProMain:(BOOL)isProMain  {
     

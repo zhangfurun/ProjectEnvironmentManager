@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EnvironmentModel : NSObject
 /// 服务器标识符id
-@property(nonatomic, copy) NSString *identifyID;
+@property(nonatomic, assign) NSInteger identifyID;
 /// 服务器环境
 @property(nonatomic, copy) NSString *environmentName;
 /**

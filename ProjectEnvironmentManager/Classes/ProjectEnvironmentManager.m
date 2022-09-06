@@ -45,7 +45,6 @@ static ProjectEnvironmentManager *_manager = nil;
     [ProjectEnvironmentManager postLoadFinishMsg];
 }
 
-
 + (instancetype)sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -98,7 +97,7 @@ static ProjectEnvironmentManager *_manager = nil;
     // 此时已经过滤出符合条件的服务器的列表
     // 获取本地保存的服务器, 与当前列表作对比
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *recordEnvironment = [userDefaults stringForKey:CY_ENVIRONMENT_LOCAL_RECORD_KEY];
+    NSInteger recordEnvironment = [userDefaults integerForKey:CY_ENVIRONMENT_LOCAL_RECORD_KEY];
 
     ProjectEnvironmentManager *manager = [self sharedManager];
 
@@ -132,8 +131,7 @@ static ProjectEnvironmentManager *_manager = nil;
     _currentEnvironmentModel = currentEnvironmentModel;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:_currentEnvironmentModel.identifyID
-                    forKey:CY_ENVIRONMENT_LOCAL_RECORD_KEY];
+    [userDefaults setInteger:_currentEnvironmentModel.identifyID forKey:CY_ENVIRONMENT_LOCAL_RECORD_KEY];
     [userDefaults synchronize];
     
     if (!isFirstSetting) {
@@ -149,7 +147,7 @@ static ProjectEnvironmentManager *_manager = nil;
         [manager.delegate environmentLoadingFinish];
     } else {
         // 通知的形式
-        [[NSNotificationCenter defaultCenter] postNotificationName:CY_ENVIROMENT_LOAD_FINISH_NOTIFICATION_NAME
+        [[NSNotificationCenter defaultCenter] postNotificationName:CY_ENVIRONMENT_LOAD_FINISH_NOTIFICATION_NAME
                                                             object:nil
                                                           userInfo:nil];
     }
@@ -160,7 +158,7 @@ static ProjectEnvironmentManager *_manager = nil;
     if(manager.delegate && [manager.delegate respondsToSelector:@selector(environmentChange:)]) {
         [manager.delegate environmentChange:model];
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:CY_ENVIROMENT_CHANGE_NOTIFICATION_NAME
+        [[NSNotificationCenter defaultCenter] postNotificationName:CY_ENVIRONMENT_CHANGE_NOTIFICATION_NAME
                                                             object:nil
                                                           userInfo:nil];
     }
